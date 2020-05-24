@@ -6,33 +6,31 @@ import { getImage, IImage, Quality } from "./ImageApi";
 export interface ShowImageProps extends DefaultProps {
     imageId?: string;
     quality?: Quality;
-    jpeg?: boolean;
 }
 
 export default function ShowImage(props: ShowImageProps) {
-    const [image, setImage] = useState<IImage>()
-
-    const fetchImage = async () => {
-        if (props.imageId !== undefined) {
-            const img = await getImage(props.imageId, props.quality, props.jpeg);
-            setImage(img);
+    const getImageUrl = () => {
+        if (props.imageId === undefined) {
+            return "/assets/profile.png"
         }
-    }
 
-    useEffect(() => {
-        fetchImage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+        let result = "http://localhost:3001/v1/image/" + props.imageId + "/jpeg"
+        if (props.quality != null) {
+            result += "?Size=" + props.quality
+        }
+        return result
+    }
 
     if (!props.imageId) {
         return null
     }
     return (
         <div >
-            <img alt="" src={image ? image.image : ""} />
+            <img alt="" src={getImageUrl()} />
             <div className="text-block">
                 <strong>{props.quality ? props.quality : "Original"}</strong>
             </div>
+            <br />
         </div>
     );
 }

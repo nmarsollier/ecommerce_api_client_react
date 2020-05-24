@@ -30,7 +30,7 @@ export default function SearchPicture(props: DefaultProps) {
             setTmpId(id)
             setImageId(id);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -52,7 +52,7 @@ export default function SearchPicture(props: DefaultProps) {
                     <FormButton label="Cancelar" onClick={() => goHome(props)} />
                 </FormButtonBar>
 
-                <ShowImages imageId={imageId} />ºº
+                <ShowImages imageId={imageId} />
             </Form>
         </div >
     );
@@ -69,8 +69,8 @@ function ShowImages(props: ShowImagesProps) {
     return (
         <div>
             <br />
-            <ShowImage imageId={props.imageId} quality={Quality.Q160} jpeg={true} />
-            <ShowImage imageId={props.imageId} quality={Quality.Q320} jpeg={true} />
+            <ShowImage imageId={props.imageId} quality={Quality.Q160} />
+            <ShowImage imageId={props.imageId} quality={Quality.Q320} />
             <ShowImage imageId={props.imageId} quality={Quality.Q640} />
             <ShowImage imageId={props.imageId} quality={Quality.Q800} />
             <ShowImage imageId={props.imageId} quality={Quality.Q1024} />
