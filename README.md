@@ -23,17 +23,17 @@ Se abre la app en el puerto 4200
 Tambien podemos usar docker en este repositorio, ejecutamos :
 
 ```bash
-docker build -t ecommerce-cli .
-docker run -it -d --name ecommerce-cli --network host ecommerce-cli
+docker build -t dev-cli .
+docker run -it -d --name dev-cli --network host dev-cli
 ```
 
 El contenedor se puede parar usando :
 
 ```bash
-docker stop ecommerce-cli
+docker stop dev-cli
 ```
 Se vuelve a levantar usando 
 
 ```bash
-docker start ecommerce-cli
+docker start dev-cli
 ```
