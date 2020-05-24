@@ -3,13 +3,7 @@
 
 # Es un cliente simple para probar la plataforma
 
-Con este cliente se pueden probar los diferentes microservicios.
-
-## Dependencias
-
-### Node 14.0.3 (en este momento)
-
-Seguir los pasos de instalación del sitio oficial [nodejs.org](https://nodejs.org/en/)
+Con este cliente se pueden probar los diferentes microservicios [ecommerce](https://github.com/nmarsollier/ecommerce).
 
 ## Ejecución
 
@@ -24,10 +18,9 @@ npm start
 
 Se abre la app en el puerto 4200
 
-
 ## Docker
 
-Para crear el contenedor docker de este repositorio ejecutamos :
+Tambien podemos usar docker en este repositorio, ejecutamos :
 
 ```bash
 docker build -t ecommerce-cli .
