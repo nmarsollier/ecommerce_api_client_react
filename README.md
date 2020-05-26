@@ -23,7 +23,7 @@ Se abre la app en el puerto 4200
 Tambien podemos usar docker en este repositorio, ejecutamos :
 
 ```bash
-docker build -t dev-cli .
+docker build -t dev-cli -f Dockerfile.dev .
 docker run -it -d --name dev-cli --network host dev-cli
 ```
 
