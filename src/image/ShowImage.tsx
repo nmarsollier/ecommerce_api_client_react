@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "../styles.css";
 import { DefaultProps } from "../system/utils/Tools";
-import { getImage, IImage, Quality } from "./ImageApi";
+import { Quality } from "./ImageApi";
 
 export interface ShowImageProps extends DefaultProps {
     imageId?: string;
