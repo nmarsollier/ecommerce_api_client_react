@@ -10,6 +10,7 @@ import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import { DefaultProps, goHome } from "../system/utils/Tools";
 import { findArticles, IArticle } from "./CatalogApi";
+import ImageButton from "../system/components/ImageButton";
 
 export default function SearchArticle(props: DefaultProps) {
     const [text, setText] = useState("")
@@ -98,16 +99,19 @@ function ArticlesList(props: ArticlesListProps) {
                                 <td>{article.description}</td>
                                 <td>
                                     {article.image}&nbsp;
-                                    <button hidden={!article.image} onClick={() => props.onShowImage(article.image)} >
-                                        <img alt="" src="/assets/find.png" />
-                                    </button>
+                                    <ImageButton
+                                        imageUrl="/assets/find.png"
+                                        hidden={!article.image}
+                                        onClick={() => props.onShowImage(article.image)}
+                                    />
                                 </td>
                                 <td>{article.stock}</td>
                                 <td>{article.price}</td>
                                 <td>
-                                    <button onClick={() => props.onEditClick(article._id)} >
-                                        <img alt="" src="/assets/edit.png" />
-                                    </button>
+                                    <ImageButton
+                                        imageUrl="/assets/edit.png"
+                                        onClick={() => props.onEditClick(article._id)}
+                                    />
                                 </td>
                             </tr>
                         );

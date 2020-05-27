@@ -7,6 +7,7 @@ import DangerLabel from "../system/components/DangerLabel";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormAcceptButton from "../system/components/FormAcceptButton";
 import FormButton from "../system/components/FormButton";
+import ImageButton from "../system/components/ImageButton";
 
 export default function OrdersList(props: DefaultProps) {
     const [orders, setOrders] = useState(new Array<IOrderList>())
@@ -61,7 +62,7 @@ export default function OrdersList(props: DefaultProps) {
 
     useEffect(() => {
         loadOrders()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -96,9 +97,10 @@ export default function OrdersList(props: DefaultProps) {
                                     <td> {element.updated} </td>
                                     <td> {element.articles} </td>
                                     <td>
-                                        <button onClick={() => showOrder(element.id)} >
-                                            <img alt="" src="/assets/edit.png" />
-                                        </button>
+                                        <ImageButton
+                                            imageUrl="/assets/edit.png"
+                                            onClick={() => showOrder(element.id)}
+                                        />
                                     </td>
                                 </tr>
                             );

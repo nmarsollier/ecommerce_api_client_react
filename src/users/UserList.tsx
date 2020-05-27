@@ -7,6 +7,7 @@ import { useErrorHandler } from "../system/utils/ErrorHandler";
 import { DefaultProps, goHome } from "../system/utils/Tools";
 import { disableUser, enableUser, getUsers, IUser } from "./UserApi";
 import UserPermission from "./UserPermission";
+import ImageButton from "../system/components/ImageButton";
 
 export default function UserList(props: DefaultProps) {
     const [users, setUsers] = useState(Array<IUser>())
@@ -39,7 +40,7 @@ export default function UserList(props: DefaultProps) {
 
     useEffect(() => {
         loadUsers()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
@@ -74,20 +75,22 @@ export default function UserList(props: DefaultProps) {
                                 <td>{user.name}</td>
                                 <td>
                                     {user.permissions.join(", ")}
-                                    <button hidden={!user.enabled}
-                                        onClick={() => editPermissionsClick(user)}>
-                                        <img alt="" src="/assets/edit.png" />
-                                    </button>
+                                    <ImageButton
+                                        hidden={!user.enabled}
+                                        imageUrl="/assets/edit.png"
+                                        onClick={() => editPermissionsClick(user)}
+                                    />
                                 </td>
                                 <td>
-                                    <button hidden={!user.enabled}
-                                        onClick={() => disableThisUser(user)}>
-                                        <img alt="" src="/assets/enable.png" />
-                                    </button>
-                                    <button hidden={user.enabled}
-                                        onClick={() => enableThisUser(user)}>
-                                        <img alt="" src="/assets/disable.png" />
-                                    </button>
+                                    <ImageButton
+                                        imageUrl="/assets/enable.png"
+                                        onClick={() => disableThisUser(user)}
+                                    />
+                                    <ImageButton
+                                        hidden={!user.enabled}
+                                        imageUrl="/assets/disable.png"
+                                        onClick={() => enableThisUser(user)}
+                                    />
                                     {user.enabled ? "Deshabilitar" : "Habilitar"}&nbsp;
                                     </td>
                             </tr>
