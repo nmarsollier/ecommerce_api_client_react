@@ -34,13 +34,13 @@ ORDER_SERVICE_URL : Url de order service (http://host.docker.internal:3004/v1/)
 También podemos usar docker en este repositorio, ejecutamos :
 
 ```bash
-docker build --no-cache -t dev-cli -f Dockerfile.dev .
+docker build --no-cache -t dev-cli .
 
 # Mac || Windows
 docker run -it -d --name dev-cli -p 4200:4200 dev-cli
 
 # Linux
-docker run --add-host host.docker.internal:172.17.0.1 -it -d --name dev-cli -p 4200:4200 dev-cli 
+docker run --add-host host.docker.internal:172.17.0.1 -it -d --name dev-cli -p 4200:4200 dev-cli
 ```
 
 El contenedor se puede parar usando :
