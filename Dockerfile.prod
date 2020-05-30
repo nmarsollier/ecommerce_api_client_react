@@ -14,5 +14,5 @@ RUN npm install --silent
 RUN npm run build
 
 # Levantamos el contenido estatico con Nginx
-FROM nginx:1.18.0-alpine
+FROM nginx:1.18.0
 COPY --from=build-stage /app/build/ /usr/share/nginx/html
