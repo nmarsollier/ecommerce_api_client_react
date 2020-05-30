@@ -1,5 +1,5 @@
-# Docker produccion o stage
-FROM node:14.3.0
+# Primero hacemos gneramos el build
+FROM node:14.3.0 as build-stage
 
 ENV AUTH_SERVICE_URL http://host.docker.internal:3000/v1/
 ENV CART_SERVICE_URL http://host.docker.internal:3003/v1/
@@ -11,8 +11,8 @@ WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
 RUN curl -L https://github.com/nmarsollier/ecommerce_api_client_react/tarball/master | tar xz --strip=1
 RUN npm install --silent
+RUN npm run build
 
-# Puerto para acceder al Cliente
-EXPOSE 4200
-
-CMD ["npm","start"]
+# Levantamos el contenido estatico con Nginx
+FROM nginx:1.18.0-alpine
+COPY --from=build-stage /app/build/ /usr/share/nginx/html
