@@ -24,7 +24,7 @@ export default function SearchArticle(props: DefaultProps) {
                 const articleResult = await findArticles(text);
                 setArticles(articleResult);
             }
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

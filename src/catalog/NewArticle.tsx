@@ -14,8 +14,11 @@ import ImageUpload from "../system/components/ImageUpload";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import { DefaultProps, goHome } from "../system/utils/Tools";
 import { deleteArticle, getArticle, newArticle, updateArticle } from "./CatalogApi";
+import { useParams } from 'react-router-dom';
 
 export default function NewArticle(props: DefaultProps) {
+    const params = useParams();
+
     const [id, setId] = useState<string>()
     const [name, setName] = useState("")
     const [description, setDescription] = useState<string | undefined>("")
@@ -36,7 +39,7 @@ export default function NewArticle(props: DefaultProps) {
             setName(article.name)
             setPrice(article.price?.toFixed(2))
             setStock(article.stock?.toFixed(0))
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -65,7 +68,7 @@ export default function NewArticle(props: DefaultProps) {
                 });
             }
             goHome(props);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -78,7 +81,7 @@ export default function NewArticle(props: DefaultProps) {
                 await deleteArticle(id);
                 goHome(props);
             }
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -94,13 +97,13 @@ export default function NewArticle(props: DefaultProps) {
             });
 
             setImage(result.id);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
 
     useEffect(() => {
-        const paramId = props.match.params.id;
+        const paramId = params.id;
         if (paramId) {
             loadArticle(paramId);
         }

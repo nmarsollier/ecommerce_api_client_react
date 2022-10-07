@@ -30,7 +30,7 @@ export default function OrderDetail(props: OrderDetailProps) {
             }
             const orderResult = await getOrder(props.orderId);
             setOrder(orderResult);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -41,7 +41,7 @@ export default function OrderDetail(props: OrderDetailProps) {
                 amount: 0,
                 method: "",
             })
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

@@ -20,7 +20,7 @@ export default function CurrentCart(props: DefaultProps) {
             const result = await getCurrentCart();
             setCurrentCart(result);
 
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -33,7 +33,7 @@ export default function CurrentCart(props: DefaultProps) {
         try {
             const result = await validate();
             setValidation(result);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -42,7 +42,7 @@ export default function CurrentCart(props: DefaultProps) {
         try {
             await checkout();
             loadCurrentCart();
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

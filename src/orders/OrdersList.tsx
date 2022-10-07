@@ -18,7 +18,7 @@ export default function OrdersList(props: DefaultProps) {
         try {
             const ordersResult = await getOrders();
             setOrders(ordersResult);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -31,7 +31,7 @@ export default function OrdersList(props: DefaultProps) {
         try {
             await batchPlaced();
             refresh();
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -40,7 +40,7 @@ export default function OrdersList(props: DefaultProps) {
         try {
             await batchValidated();
             refresh();
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -49,7 +49,7 @@ export default function OrdersList(props: DefaultProps) {
         try {
             await batchPaymentDefined();
             refresh();
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

@@ -11,8 +11,11 @@ import { useErrorHandler } from "../system/utils/ErrorHandler";
 import { DefaultProps, goHome } from "../system/utils/Tools";
 import { Quality } from "./ImageApi";
 import ShowImage from "./ShowImage";
+import { useParams } from 'react-router-dom';
 
 export default function SearchPicture(props: DefaultProps) {
+    const params = useParams();
+
     const [tmpId, setTmpId] = useState("")
     const [imageId, setImageId] = useState<string>()
 
@@ -25,7 +28,7 @@ export default function SearchPicture(props: DefaultProps) {
     }
 
     useEffect(() => {
-        const id = props.match.params.imageId;
+        const id = params.imageId;
         if (id) {
             setTmpId(id)
             setImageId(id);

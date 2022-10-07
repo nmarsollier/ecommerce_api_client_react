@@ -35,7 +35,7 @@ export default function Login(props: DefaultProps) {
         try {
             await login({ login: userName, password });
             props.history.push("/");
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

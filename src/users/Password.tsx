@@ -37,7 +37,7 @@ export default function Password(props: DefaultProps) {
         try {
             await changePassword({ currentPassword, newPassword });
             goHome(props);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

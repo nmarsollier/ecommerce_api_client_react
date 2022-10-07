@@ -1,5 +1,5 @@
 import React from "react";
-import { HashRouter, Route } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import CurrentCart from "../cart/CurrentCart";
 import EditCart from "../cart/EditCart";
 import NewArticle from "../catalog/NewArticle";
@@ -36,23 +36,29 @@ export default function App() {
               <Menu />
             </td>
             <td id="content" className="app_content">
-              <Route exact path="/" component={Welcome} />
-              <Route exact path="/login" component={Login} />
-              <Route path="/newUser" component={Register} />
-              <Route path="/cart" component={CurrentCart} />
-              <Route path="/uploadPicture" component={UploadPicture} />
-              <Route path="/searchPicture" component={SearchPicture} />
-              <Route path="/showPicture/:imageId" component={SearchPicture} />
-              <Route path="/userList" component={UserList} />
-              <Route path="/newArticle" component={NewArticle} />
-              <Route path="/editArticle/:id" component={NewArticle} />
-              <Route path="/searchArticle" component={SearchArticle} />
-              <Route path="/editCart" component={EditCart} />
-              <Route path="/orders" component={OrdersList} />
-              <Route path="/searchOrder" component={SearchOrder} />
-              <Route path="/showOrder/:orderId" component={SearchOrder} />
-              <LoggedInRoute path="/info" component={Info} />
-              <LoggedInRoute path="/password" component={Password} />
+              <Routes>
+                <Route path="/" element={<Welcome/>} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/newUser" element={<Register/>} />
+                <Route path="/cart" element={<CurrentCart/>} />
+                <Route path="/uploadPicture" element={<UploadPicture/>} />
+                <Route path="/searchPicture" element={<SearchPicture/>} />
+                <Route path="/showPicture/:imageId" element={<SearchPicture/>} />
+                <Route path="/userList" element={<UserList/>} />
+                <Route path="/newArticle" element={<NewArticle/>} />
+                <Route path="/editArticle/:id" element={<NewArticle/>} />
+                <Route path="/searchArticle" element={<SearchArticle/>} />
+                <Route path="/editCart" element={<EditCart/>} />
+                <Route path="/orders" element={<OrdersList/>} />
+                <Route path="/searchOrder" element={<SearchOrder/>} />
+                <Route path="/showOrder/:orderId" element={<SearchOrder/>} />
+                <Route path="/info" element={<LoggedInRoute/>}>
+                  <Route path="/info" element={<Info/>}/>
+                </Route>
+                <Route path="/password" element={<LoggedInRoute/>}>
+                  <Route path="/password" element={<Password/>}/>
+                </Route>
+              </Routes>
             </td>
           </tr>
         </tbody>

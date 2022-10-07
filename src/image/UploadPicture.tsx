@@ -33,7 +33,7 @@ export default function UploadPicture(props: DefaultProps) {
                 image
             });
             setImageId(result.id);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

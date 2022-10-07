@@ -44,7 +44,7 @@ export default function Register(props: DefaultProps) {
                 login, name, password
             });
             goHome(props);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

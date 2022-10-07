@@ -30,7 +30,7 @@ export default function AddPayment(props: AddPaymentProps) {
         try {
             await addPayment(props.orderId, method, amount);
             props.onPaymentAdded();
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

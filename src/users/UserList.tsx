@@ -19,7 +19,7 @@ export default function UserList(props: DefaultProps) {
         try {
             const result = await getUsers();
             setUsers(result);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }

@@ -10,8 +10,11 @@ import DangerLabel from "../system/components/DangerLabel";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormButton from "../system/components/FormButton";
 import FormAcceptButton from "../system/components/FormAcceptButton";
+import { useParams } from 'react-router-dom';
 
 export default function SearchOrder(props: DefaultProps) {
+    const params = useParams();
+
     const [text, setText] = useState("")
     const [orderId, setOrderId] = useState<string>()
 
@@ -20,13 +23,13 @@ export default function SearchOrder(props: DefaultProps) {
     const search = () => {
         try {
             setOrderId(text);
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
 
     useEffect(() => {
-        const id = props.match.params.orderId;
+        const id = params.orderId;
         if (id) {
             setOrderId(id);
         }

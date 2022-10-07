@@ -29,7 +29,7 @@ export default function EditCart(props: DefaultProps) {
                 quantity,
             });
             forceUpdate()
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -40,7 +40,7 @@ export default function EditCart(props: DefaultProps) {
                 await incrementArticle(articleId);
                 forceUpdate()
             }
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -51,7 +51,7 @@ export default function EditCart(props: DefaultProps) {
                 await decrementArticle(articleId);
                 forceUpdate()
             }
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
@@ -62,7 +62,7 @@ export default function EditCart(props: DefaultProps) {
                 await deleteArticle(articleId);
                 forceUpdate()
             }
-        } catch (error) {
+        } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
     }
