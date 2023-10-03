@@ -4,16 +4,18 @@ import FormButton from "../system/components/FormButton";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { disableUser, enableUser, getUsers, IUser } from "./UserApi";
 import UserPermission from "./UserPermission";
 import ImageButton from "../system/components/ImageButton";
+import { useNavigate } from "react-router-dom";
 
 export default function UserList(props: DefaultProps) {
     const [users, setUsers] = useState(Array<IUser>())
     const [editUser, setEditUser] = useState<IUser | undefined>()
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const loadUsers = async () => {
         try {
@@ -102,7 +104,7 @@ export default function UserList(props: DefaultProps) {
             {permEdit}
 
             <FormButtonBar>
-                <FormButton onClick={() => goHome(props)} label="Cancelar" />
+                <FormButton onClick={() => navigate("/")} label="Cancelar" />
             </FormButtonBar>
         </div>
     );

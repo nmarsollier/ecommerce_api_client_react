@@ -8,15 +8,17 @@ import FormInput from "../system/components/FormInput";
 import FormTitle from "../system/components/FormTitle";
 import FormWarnButton from "../system/components/FormWarnButton";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome, useForceUpdate } from "../system/utils/Tools";
+import { DefaultProps, useForceUpdate } from "../system/utils/Tools";
 import { addArticle, decrementArticle, deleteArticle, incrementArticle } from "./CartApi";
 import CurrentCart from "./CurrentCart";
+import { useNavigate } from "react-router-dom";
 
 export default function EditCart(props: DefaultProps) {
     const [articleId, setArticleId] = useState("")
     const [quantity, setQuantity] = useState(0)
     const forceUpdate = useForceUpdate();
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const onAddArticle = async () => {
         try {
@@ -95,7 +97,7 @@ export default function EditCart(props: DefaultProps) {
                     <FormAcceptButton onClick={onIncrement} label="Incrementar" />
                     <FormAcceptButton onClick={onDecrement} label="Decrementar" />
                     <FormWarnButton onClick={onDelete} label="Eliminar" />
-                    <FormButton onClick={() => goHome(props)} label="Cancelar" />
+                    <FormButton onClick={() => navigate("/")} label="Cancelar" />
                 </FormButtonBar>
 
                 <DangerLabel message={errorHandler.errorMessage} />

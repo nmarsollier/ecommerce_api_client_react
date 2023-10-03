@@ -143,5 +143,5 @@ export async function revoke(id: string, permissions: string[]): Promise<void> {
 }
 
 if (getCurrentToken()) {
-    axios.defaults.headers.common.Authorization = "bearer " + getCurrentToken();
+    axios.defaults.headers.common['Authorization'] = "bearer " + getCurrentToken();
 }

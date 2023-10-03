@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../styles.css";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { changePassword } from "./UserApi";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import FormTitle from "../system/components/FormTitle";
@@ -10,6 +10,7 @@ import DangerLabel from "../system/components/DangerLabel";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormAcceptButton from "../system/components/FormAcceptButton";
 import FormButton from "../system/components/FormButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Password(props: DefaultProps) {
     const [currentPassword, setCurrentPassword] = useState("")
@@ -17,6 +18,7 @@ export default function Password(props: DefaultProps) {
     const [newPassword2, setNewPassword2] = useState("")
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const updatePasswordClick = async () => {
         errorHandler.cleanRestValidations();
@@ -36,7 +38,7 @@ export default function Password(props: DefaultProps) {
 
         try {
             await changePassword({ currentPassword, newPassword });
-            goHome(props);
+            navigate("/");
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
@@ -69,7 +71,7 @@ export default function Password(props: DefaultProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton label="Cambiar" onClick={updatePasswordClick} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
             </Form>
         </div>

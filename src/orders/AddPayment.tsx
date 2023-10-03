@@ -1,16 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles.css";
-import ErrorLabel from "../system/components/ErrorLabel";
-import { addPayment, IPayment } from "./OrdersApi";
-import { DefaultProps, goHome } from "../system/utils/Tools";
-import { useErrorHandler } from "../system/utils/ErrorHandler";
-import FormTitle from "../system/components/FormTitle";
-import Form from "../system/components/Form";
-import FormInput from "../system/components/FormInput";
 import DangerLabel from "../system/components/DangerLabel";
-import FormButtonBar from "../system/components/FormButtonBar";
+import ErrorLabel from "../system/components/ErrorLabel";
+import Form from "../system/components/Form";
 import FormAcceptButton from "../system/components/FormAcceptButton";
 import FormButton from "../system/components/FormButton";
+import FormButtonBar from "../system/components/FormButtonBar";
+import FormInput from "../system/components/FormInput";
+import FormTitle from "../system/components/FormTitle";
+import { useErrorHandler } from "../system/utils/ErrorHandler";
+import { DefaultProps } from "../system/utils/Tools";
+import { addPayment, IPayment } from "./OrdersApi";
 
 interface AddPaymentProps extends DefaultProps {
     orderId: string;
@@ -23,6 +24,7 @@ export default function AddPayment(props: AddPaymentProps) {
     const [method, setMethod] = useState(props.payment.method)
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const addPaymentClick = async () => {
         errorHandler.cleanRestValidations();
@@ -63,7 +65,7 @@ export default function AddPayment(props: AddPaymentProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton label="Agregar" onClick={addPaymentClick} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
             </Form>
         </div >

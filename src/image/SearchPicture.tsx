@@ -8,10 +8,10 @@ import FormButtonBar from "../system/components/FormButtonBar";
 import FormInput from "../system/components/FormInput";
 import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { Quality } from "./ImageApi";
 import ShowImage from "./ShowImage";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function SearchPicture(props: DefaultProps) {
     const params = useParams();
@@ -20,6 +20,7 @@ export default function SearchPicture(props: DefaultProps) {
     const [imageId, setImageId] = useState<string>()
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const searchImage = () => {
         if (tmpId) {
@@ -52,7 +53,7 @@ export default function SearchPicture(props: DefaultProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton label="Buscar" onClick={searchImage} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
 
                 <ShowImages imageId={imageId} />

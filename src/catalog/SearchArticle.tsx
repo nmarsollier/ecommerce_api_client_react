@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles.css";
 import DangerLabel from "../system/components/DangerLabel";
 import Form from "../system/components/Form";
@@ -7,16 +8,17 @@ import FormButton from "../system/components/FormButton";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormInput from "../system/components/FormInput";
 import FormTitle from "../system/components/FormTitle";
-import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome } from "../system/utils/Tools";
-import { findArticles, IArticle } from "./CatalogApi";
 import ImageButton from "../system/components/ImageButton";
+import { useErrorHandler } from "../system/utils/ErrorHandler";
+import { DefaultProps } from "../system/utils/Tools";
+import { IArticle, findArticles } from "./CatalogApi";
 
 export default function SearchArticle(props: DefaultProps) {
     const [text, setText] = useState("")
     const [articles, setArticles] = useState(new Array<IArticle>())
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const search = async () => {
         try {
@@ -31,13 +33,13 @@ export default function SearchArticle(props: DefaultProps) {
 
     const showImage = (imageId: string | undefined) => {
         if (imageId !== undefined) {
-            props.history.push("/showPicture/" + imageId);
+            navigate("/showPicture/" + imageId);
         }
     }
 
     const editArticle = (id: string | undefined) => {
         if (id !== undefined) {
-            props.history.push("/editArticle/" + id);
+            navigate("/editArticle/" + id);
         }
     }
 
@@ -56,7 +58,7 @@ export default function SearchArticle(props: DefaultProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton label="Buscar" onClick={search} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
             </Form>
 

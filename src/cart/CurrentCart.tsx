@@ -6,14 +6,16 @@ import FormButtonBar from "../system/components/FormButtonBar";
 import FormLabel from "../system/components/FormLabel";
 import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { checkout, getCurrentCart, ICart, ICartValidation, validate } from "./CartApi";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 export default function CurrentCart(props: DefaultProps) {
     const [currentCart, setCurrentCart] = useState<ICart>()
     const [validation, setValidation] = useState<ICartValidation | undefined>()
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const loadCurrentCart = async () => {
         try {
@@ -49,7 +51,7 @@ export default function CurrentCart(props: DefaultProps) {
 
     useEffect(() => {
         loadCurrentCart()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -57,6 +59,7 @@ export default function CurrentCart(props: DefaultProps) {
             <FormTitle>Carrito Actual</FormTitle>
 
             <CurrentCartDetails
+                navigate={navigate}
                 cart={currentCart}
                 onValidate={onValidate}
                 onCheckout={onCheckout}
@@ -75,6 +78,7 @@ export default function CurrentCart(props: DefaultProps) {
 
 
 interface CurrentCartDetailsProps extends DefaultProps {
+    navigate: NavigateFunction,
     cart?: ICart,
     onValidate: () => any,
     onCheckout: () => any,
@@ -117,7 +121,7 @@ function CurrentCartDetails(props: CurrentCartDetailsProps) {
                     <FormAcceptButton label="Validar" onClick={props.onValidate} />
                     <FormAcceptButton label="Checkout" onClick={props.onCheckout} />
                     <FormAcceptButton label="Refresh" onClick={props.onRefresh} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => props.navigate("/")} />
                 </FormButtonBar>
             </div>
         </div>

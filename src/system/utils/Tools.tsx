@@ -6,12 +6,6 @@ export interface DefaultProps {
     children?: any;
 }
 
-export function goHome(props: DefaultProps) {
-    if (props.history) {
-        props.history.push("/");
-    }
-}
-
 export function useForceUpdate() {
     const setForceUpdate = useState(0)[1]
 

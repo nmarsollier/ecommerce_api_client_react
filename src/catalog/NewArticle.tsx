@@ -12,12 +12,13 @@ import FormTitle from "../system/components/FormTitle";
 import FormWarnButton from "../system/components/FormWarnButton";
 import ImageUpload from "../system/components/ImageUpload";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { deleteArticle, getArticle, newArticle, updateArticle } from "./CatalogApi";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function NewArticle(props: DefaultProps) {
     const params = useParams();
+    const navigate = useNavigate();
 
     const [id, setId] = useState<string>()
     const [name, setName] = useState("")
@@ -50,7 +51,7 @@ export default function NewArticle(props: DefaultProps) {
         try {
             if (id) {
                 await updateArticle(id, {
-                    _id: id,
+                    _id : id,
                     name,
                     description,
                     image,
@@ -59,7 +60,7 @@ export default function NewArticle(props: DefaultProps) {
                 });
             } else {
                 await newArticle({
-                    _id: id,
+                    _id : id,
                     name,
                     description,
                     image,
@@ -67,7 +68,7 @@ export default function NewArticle(props: DefaultProps) {
                     stock: parseInt(stock ? stock : "0", 10)
                 });
             }
-            goHome(props);
+            navigate("/");
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
@@ -79,7 +80,7 @@ export default function NewArticle(props: DefaultProps) {
         try {
             if (id) {
                 await deleteArticle(id);
-                goHome(props);
+                navigate("/");
             }
         } catch (error: any) {
             errorHandler.processRestValidations(error);
@@ -107,7 +108,7 @@ export default function NewArticle(props: DefaultProps) {
         if (paramId) {
             loadArticle(paramId);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -156,7 +157,7 @@ export default function NewArticle(props: DefaultProps) {
                 <FormButtonBar>
                     <FormAcceptButton label={id ? "Actualizar" : "Agregar"} onClick={addArticle} />
                     <FormWarnButton label="Eliminar" onClick={delArticle} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
             </Form>
         </div>

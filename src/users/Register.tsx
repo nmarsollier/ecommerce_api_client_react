@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "../styles.css";
 import { newUser } from "../system/store/SessionStore";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import FormTitle from "../system/components/FormTitle";
 import Form from "../system/components/Form";
@@ -11,12 +11,14 @@ import DangerLabel from "../system/components/DangerLabel";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormAcceptButton from "../system/components/FormAcceptButton";
 import FormButton from "../system/components/FormButton";
+import { useNavigate } from "react-router-dom";
 
 export default function Register(props: DefaultProps) {
     const [login, setLogin] = useState("")
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [password2, setPassword2] = useState("")
+    const navigate = useNavigate();
 
     const errorHandler = useErrorHandler()
 
@@ -43,7 +45,7 @@ export default function Register(props: DefaultProps) {
             await newUser({
                 login, name, password
             });
-            goHome(props);
+            navigate("/");
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
@@ -82,7 +84,7 @@ export default function Register(props: DefaultProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton label="Registrarse" onClick={registerClick} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
             </Form>
         </div>

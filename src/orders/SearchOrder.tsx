@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles.css";
 import OrderDetail from "./OrderDetail";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import FormTitle from "../system/components/FormTitle";
 import FormInput from "../system/components/FormInput";
@@ -10,7 +10,7 @@ import DangerLabel from "../system/components/DangerLabel";
 import FormButtonBar from "../system/components/FormButtonBar";
 import FormButton from "../system/components/FormButton";
 import FormAcceptButton from "../system/components/FormAcceptButton";
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function SearchOrder(props: DefaultProps) {
     const params = useParams();
@@ -19,6 +19,7 @@ export default function SearchOrder(props: DefaultProps) {
     const [orderId, setOrderId] = useState<string>()
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const search = () => {
         try {
@@ -52,7 +53,7 @@ export default function SearchOrder(props: DefaultProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton label="Buscar" onClick={search} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
             </Form>
 

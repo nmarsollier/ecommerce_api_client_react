@@ -10,14 +10,16 @@ import FormLabel from "../system/components/FormLabel";
 import FormTitle from "../system/components/FormTitle";
 import ImageUpload from "../system/components/ImageUpload";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, goHome } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { getPictureUrl, saveImage } from "./ImageApi";
+import { useNavigate } from "react-router-dom";
 
 export default function UploadPicture(props: DefaultProps) {
     const [imageId, setImageId] = useState<string>()
     const [image, setImage] = useState<string>()
 
     const errorHandler = useErrorHandler()
+    const navigate = useNavigate();
 
     const updateImageState = (img: string) => {
         setImage(img);
@@ -55,7 +57,7 @@ export default function UploadPicture(props: DefaultProps) {
 
                 <FormButtonBar>
                     <FormAcceptButton hidden={imageId !== undefined} label="Subir" onClick={saveImageClick} />
-                    <FormButton label="Cancelar" onClick={() => goHome(props)} />
+                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
                 </FormButtonBar>
 
             </Form>
