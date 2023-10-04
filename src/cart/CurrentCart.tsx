@@ -10,7 +10,11 @@ import { DefaultProps } from "../system/utils/Tools";
 import { checkout, getCurrentCart, ICart, ICartValidation, validate } from "./CartApi";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-export default function CurrentCart(props: DefaultProps) {
+interface CurrentCartProps extends DefaultProps {
+    forceUpdate?: () => any
+}
+
+export default function CurrentCart(props: CurrentCartProps) {
     const [currentCart, setCurrentCart] = useState<ICart>()
     const [validation, setValidation] = useState<ICartValidation | undefined>()
 
@@ -52,7 +56,7 @@ export default function CurrentCart(props: DefaultProps) {
     useEffect(() => {
         loadCurrentCart()
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [props.forceUpdate])
 
     return (
         <div className="global_content">

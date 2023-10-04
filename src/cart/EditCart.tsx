@@ -71,7 +71,7 @@ export default function EditCart(props: DefaultProps) {
 
     return (
         <div className="global_content">
-            <CurrentCart />
+            <CurrentCart forceUpdate={forceUpdate}/>
             <br />
 
             <FormTitle>Artículos</FormTitle>
