@@ -9,7 +9,7 @@
     "@types/react-dom": "18.0.6",
     "@types/react-redux": "7.1.24",
     "@types/react-router-dom": "5.3.3",
-    "axios": "1.1.2",
+    "axios": "1.6.0",
     "bootstrap": "5.2.2",
     "jquery": "3.6.1",
     "popper.js": "1.16.1",
