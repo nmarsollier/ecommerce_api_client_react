@@ -33,9 +33,9 @@ export default function SearchOrder(props: DefaultProps) {
         const id = params.orderId;
         if (id) {
             setOrderId(id);
-            setText(id)
         }
-    }, [params.orderId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="global_content" >

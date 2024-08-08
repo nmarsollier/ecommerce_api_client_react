@@ -5,7 +5,6 @@ axios.defaults.headers.common["Content-Type"] = "application/json";
 
 export interface IOrderList {
     id: string;
-    orderId: string;
     status: string;
     cartId: string;
     created: string;

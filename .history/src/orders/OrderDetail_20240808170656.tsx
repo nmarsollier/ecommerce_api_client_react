@@ -13,7 +13,6 @@ interface OrderDetailProps extends DefaultProps {
 }
 
 export default function OrderDetail(props: OrderDetailProps) {
-    const [time, setTime] = useState(Date.now())
     const [order, setOrder] = useState<IOrder>()
     const [payment, setPayment] = useState<IPayment>()
 
@@ -21,7 +20,6 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     const cancelPayment = () => {
         setPayment(undefined);
-        setTime(Date.now())
     }
 
     useEffect(() => {
@@ -36,7 +34,7 @@ export default function OrderDetail(props: OrderDetailProps) {
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
-    }, [props.orderId, errorHandler, time])
+    }, [props.orderId, errorHandler])
 
     const addPayment = () => {
         try {

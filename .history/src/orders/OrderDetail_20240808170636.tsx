@@ -13,7 +13,6 @@ interface OrderDetailProps extends DefaultProps {
 }
 
 export default function OrderDetail(props: OrderDetailProps) {
-    const [time, setTime] = useState(Date.now())
     const [order, setOrder] = useState<IOrder>()
     const [payment, setPayment] = useState<IPayment>()
 
@@ -21,7 +20,6 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     const cancelPayment = () => {
         setPayment(undefined);
-        setTime(Date.now())
     }
 
     useEffect(() => {
@@ -36,7 +34,7 @@ export default function OrderDetail(props: OrderDetailProps) {
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
-    }, [props.orderId, errorHandler, time])
+    }, [props.orderId, errorHandler])
 
     const addPayment = () => {
         try {
@@ -55,8 +53,8 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     let total = 0
     order.articles?.forEach((value) => {total+=value.unitaryPrice*value.quantity}) 
-    let paymentTotal = 0
-    order.payment?.forEach((value) => {paymentTotal+=value.amount}) 
+    let payment = 0
+    order.payment?.forEach((value) => {payment+=value.amount}) 
 
     return (
         <div className="global_content">
@@ -66,7 +64,7 @@ export default function OrderDetail(props: OrderDetailProps) {
                 <FormLabel label="Cart Id" text={order.cartId} />
                 <FormLabel label="Estado" text={order.status} />
                 <FormLabel label="Importe Total" text={total.toFixed(2)} />
-                <FormLabel label="Pago Total" text={paymentTotal.toFixed(2)} />
+                <FormLabel label="Pago Total" text={order.totalPayment.toFixed(2)} />
                 <FormLabel label="Creada" text={order.created} />
                 <FormLabel label="Actualizada" text={order.updated} />
             </div>

@@ -21,7 +21,6 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     const cancelPayment = () => {
         setPayment(undefined);
-        setTime(Date.now())
     }
 
     useEffect(() => {

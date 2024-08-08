@@ -35,7 +35,7 @@ export default function SearchOrder(props: DefaultProps) {
             setOrderId(id);
             setText(id)
         }
-    }, [params.orderId])
+    }, [orderId])
 
     return (
         <div className="global_content" >

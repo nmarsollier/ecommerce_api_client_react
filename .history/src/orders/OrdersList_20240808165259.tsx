@@ -90,7 +90,7 @@ export default function OrdersList(props: DefaultProps) {
                         {orders ? orders.map((element, i) => {
                             return (
                                 <tr key={i}>
-                                    <td> {element.orderId} </td>
+                                    <td> {element.id} </td>
                                     <td> {element.cartId} </td>
                                     <td> {element.status} </td>
                                     <td> {element.totalPrice} </td>
@@ -101,7 +101,7 @@ export default function OrdersList(props: DefaultProps) {
                                     <td>
                                         <ImageButton
                                             imageUrl="/assets/edit.png"
-                                            onClick={() => showOrder(element.orderId)}
+                                            onClick={() => showOrder(element.id)}
                                         />
                                     </td>
                                 </tr>

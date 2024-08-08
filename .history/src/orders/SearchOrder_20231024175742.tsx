@@ -1,16 +1,16 @@
-import { useEffect, useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
 import "../styles.css";
-import DangerLabel from "../system/components/DangerLabel";
-import Form from "../system/components/Form";
-import FormAcceptButton from "../system/components/FormAcceptButton";
-import FormButton from "../system/components/FormButton";
-import FormButtonBar from "../system/components/FormButtonBar";
-import FormInput from "../system/components/FormInput";
-import FormTitle from "../system/components/FormTitle";
-import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps } from "../system/utils/Tools";
 import OrderDetail from "./OrderDetail";
+import { DefaultProps } from "../system/utils/Tools";
+import { useErrorHandler } from "../system/utils/ErrorHandler";
+import FormTitle from "../system/components/FormTitle";
+import FormInput from "../system/components/FormInput";
+import Form from "../system/components/Form";
+import DangerLabel from "../system/components/DangerLabel";
+import FormButtonBar from "../system/components/FormButtonBar";
+import FormButton from "../system/components/FormButton";
+import FormAcceptButton from "../system/components/FormAcceptButton";
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function SearchOrder(props: DefaultProps) {
     const params = useParams();
@@ -33,9 +33,9 @@ export default function SearchOrder(props: DefaultProps) {
         const id = params.orderId;
         if (id) {
             setOrderId(id);
-            setText(id)
         }
-    }, [params.orderId])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <div className="global_content" >
@@ -45,6 +45,7 @@ export default function SearchOrder(props: DefaultProps) {
                 <FormInput
                     label="Numero Orden"
                     name="text"
+                    value={orderId}
                     onChange={e => setText(e.target.value)}
                     errorHandler={errorHandler} />
 
