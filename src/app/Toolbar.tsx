@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { IStoredState } from "../system/store/SessionStore";
 import "./Toolbar.css";
@@ -21,14 +20,14 @@ export default function Toolbar() {
         </div>
 
       <div className="btn-group navbar-nav">
-        <a href="http://localhost:3000/" target="auth"
+        <a href="http://localhost:3000/docs/index.html" target="auth"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Auth
           </a>
       </div>
 
       <div className="btn-group navbar-nav">
-        <a href="http://localhost:3001/" target="image"
+        <a href="http://localhost:3001/docs/index.html" target="image"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Image
           </a>
@@ -49,7 +48,7 @@ export default function Toolbar() {
       </div>
 
       <div className="btn-group navbar-nav">
-        <a href="http://localhost:3004/" target="order"
+        <a href="http://localhost:3004/docs/index.html" target="order"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Order
           </a>
