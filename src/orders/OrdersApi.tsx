@@ -16,7 +16,7 @@ export interface IOrderList {
 }
 
 export interface IOrder {
-    id: string;
+    orderId: string;
     status: string;
     cartId: string;
     totalPrice: number;
@@ -24,7 +24,7 @@ export interface IOrder {
     updated: string;
     totalPayment: number;
     articles: IArticle[];
-    payment: IPayment[];
+    payments: IPayment[];
 }
 
 export interface IArticle {
@@ -53,6 +53,7 @@ export async function addPayment(orderId: string, method: string, amount: number
     try {
         const res = await axios.post(environment.orderServerUrl + "orders/" + orderId + "/payment",
             {
+                orderId,
                 amount,
                 method,
             });

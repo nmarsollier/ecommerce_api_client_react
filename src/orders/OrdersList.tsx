@@ -8,7 +8,7 @@ import FormTitle from "../system/components/FormTitle";
 import ImageButton from "../system/components/ImageButton";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import { DefaultProps } from "../system/utils/Tools";
-import { IOrderList, batchPaymentDefined, batchPlaced, batchValidated, getOrders } from "./OrdersApi";
+import { IOrderList, getOrders } from "./OrdersApi";
 
 export default function OrdersList(props: DefaultProps) {
     const [orders, setOrders] = useState(new Array<IOrderList>())
@@ -27,33 +27,6 @@ export default function OrdersList(props: DefaultProps) {
 
     const refresh = () => {
         loadOrders();
-    }
-
-    const batchPlacedClick = async () => {
-        try {
-            await batchPlaced();
-            refresh();
-        } catch (error: any) {
-            errorHandler.processRestValidations(error);
-        }
-    }
-
-    const batchValidatedClick = async () => {
-        try {
-            await batchValidated();
-            refresh();
-        } catch (error: any) {
-            errorHandler.processRestValidations(error);
-        }
-    }
-
-    const batchPaymentDefinedClick = async () => {
-        try {
-            await batchPaymentDefined();
-            refresh();
-        } catch (error: any) {
-            errorHandler.processRestValidations(error);
-        }
     }
 
     const showOrder = (id?: string) => {
@@ -114,9 +87,6 @@ export default function OrdersList(props: DefaultProps) {
 
             <FormButtonBar>
                 <FormAcceptButton label="Actualizar" onClick={refresh} />
-                <FormAcceptButton label="Batch PLACED" onClick={batchPlacedClick} />
-                <FormAcceptButton label="Batch VALIDATED" onClick={batchValidatedClick} />
-                <FormAcceptButton label="Batch PAYMENT_DEFINED" onClick={batchPaymentDefinedClick} />
                 <FormButton label="Cancelar" onClick={() => navigate("/")} />
             </FormButtonBar>
 

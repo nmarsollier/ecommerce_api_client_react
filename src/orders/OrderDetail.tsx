@@ -19,7 +19,7 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     const errorHandler = useErrorHandler()
 
-    const cancelPayment = () => {
+    const resetPayment = () => {
         setPayment(undefined);
         setTime(Date.now())
     }
@@ -31,7 +31,7 @@ export default function OrderDetail(props: OrderDetailProps) {
             }
             getOrder(props.orderId).then((orderResult) => {
                 setOrder(orderResult);
-            }).catch(() => {});
+            }).catch(() => { });
             ;
         } catch (error: any) {
             errorHandler.processRestValidations(error);
@@ -42,7 +42,7 @@ export default function OrderDetail(props: OrderDetailProps) {
         try {
             setPayment({
                 amount: 0,
-                method: "",
+                method: "CASH",
             })
         } catch (error: any) {
             errorHandler.processRestValidations(error);
@@ -54,16 +54,16 @@ export default function OrderDetail(props: OrderDetailProps) {
     }
 
     let total = 0
-    order.articles?.forEach((value) => {total+=value.unitaryPrice*value.quantity}) 
+    order.articles?.forEach((value) => { total += value.unitaryPrice * value.quantity })
     let paymentTotal = 0
-    order.payment?.forEach((value) => {paymentTotal+=value.amount}) 
+    order.payments?.forEach((value) => { paymentTotal += value.amount })
 
     return (
         <div className="global_content">
-            <FormTitle>Detalle de Orden : {order.id}</FormTitle>
+            <FormTitle>Detalle de Orden : {order.orderId}</FormTitle>
 
             <div>
-                <FormLabel label="Cart Id" text={order.cartId} />
+                <FormLabel label="Order Id" text={order.orderId} />
                 <FormLabel label="Estado" text={order.status} />
                 <FormLabel label="Importe Total" text={total.toFixed(2)} />
                 <FormLabel label="Pago Total" text={paymentTotal.toFixed(2)} />
@@ -100,16 +100,16 @@ export default function OrderDetail(props: OrderDetailProps) {
 
             <br />
             <h4>Pagos</h4>
-            <table>
+            <table id="articles" className="table">
                 <thead>
                     <tr>
                         <th> Método </th>
-                        <th> Import </th>
+                        <th> Importe </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {(order && order.payment) ?
-                        order.payment!.map((pay, i) => {
+                    {(order && order.payments) ?
+                        order.payments!.map((pay, i) => {
                             return (
                                 <tr key={i}>
                                     <td>{pay.method}</td>
@@ -123,6 +123,7 @@ export default function OrderDetail(props: OrderDetailProps) {
 
             <br />
             <FormButtonBar>
+                <FormAcceptButton label="Actualizar" onClick={resetPayment} />
                 <FormAcceptButton label="Agregar Pago" onClick={addPayment} />
 
             </FormButtonBar>
@@ -130,9 +131,9 @@ export default function OrderDetail(props: OrderDetailProps) {
             <br />
             {(payment) ?
                 <AddPayment
-                    orderId={order!.id}
+                    orderId={order!.orderId}
                     payment={payment!}
-                    onPaymentAdded={cancelPayment} />
+                    onPaymentAdded={resetPayment} />
                 : null
             }
         </div>

@@ -45,6 +45,7 @@ export default function SearchOrder(props: DefaultProps) {
                 <FormInput
                     label="Numero Orden"
                     name="text"
+                    value={text}
                     onChange={e => setText(e.target.value)}
                     errorHandler={errorHandler} />
 

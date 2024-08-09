@@ -46,6 +46,7 @@ export default function AddPayment(props: AddPaymentProps) {
                     <label>Method</label>
 
                     <select id="method"
+                        value={method}
                         onChange={e => setMethod(e.target.value)}
                         className={errorHandler.getErrorClass("method", "form-control")}>
                         <option value="CASH">CASH</option>
