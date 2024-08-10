@@ -23,6 +23,7 @@ export interface ICart {
 export interface IArticle {
     articleId: string;
     quantity: number;
+    valid?: boolean,
     validated?: boolean;
 }
 

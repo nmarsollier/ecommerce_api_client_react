@@ -4,7 +4,7 @@ import FormButtonBar from "../system/components/FormButtonBar";
 import FormLabel from "../system/components/FormLabel";
 import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps } from "../system/utils/Tools";
+import { DefaultProps, useForceUpdate } from "../system/utils/Tools";
 import AddPayment from "./AddPayment";
 import { getOrder, IOrder, IPayment } from "./OrdersApi";
 
@@ -13,7 +13,7 @@ interface OrderDetailProps extends DefaultProps {
 }
 
 export default function OrderDetail(props: OrderDetailProps) {
-    const [time, setTime] = useState(Date.now())
+    const forceUpdate = useForceUpdate();
     const [order, setOrder] = useState<IOrder>()
     const [payment, setPayment] = useState<IPayment>()
 
@@ -21,7 +21,7 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     const resetPayment = () => {
         setPayment(undefined);
-        setTime(Date.now())
+        forceUpdate()
     }
 
     useEffect(() => {
@@ -36,7 +36,7 @@ export default function OrderDetail(props: OrderDetailProps) {
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
-    }, [props.orderId, errorHandler, time])
+    }, [props.orderId, errorHandler, forceUpdate])
 
     const addPayment = () => {
         try {

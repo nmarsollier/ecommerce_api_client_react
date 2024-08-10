@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import DangerLabel from "../system/components/DangerLabel";
 import FormAcceptButton from "../system/components/FormAcceptButton";
 import FormButton from "../system/components/FormButton";
@@ -8,7 +9,6 @@ import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
 import { DefaultProps } from "../system/utils/Tools";
 import { checkout, getCurrentCart, ICart, ICartValidation, validate } from "./CartApi";
-import { NavigateFunction, useNavigate } from "react-router-dom";
 
 interface CurrentCartProps extends DefaultProps {
     forceUpdate?: () => any
@@ -105,6 +105,7 @@ function CurrentCartDetails(props: CurrentCartDetailsProps) {
                         <tr>
                             <th>Id</th>
                             <th>Cantidad</th>
+                            <th>Valid</th>
                             <th>Validado</th>
                         </tr>
                     </thead>
@@ -114,7 +115,8 @@ function CurrentCartDetails(props: CurrentCartDetailsProps) {
                                 <tr key={i}>
                                     <td>{article.articleId}</td>
                                     <td>{article.quantity}</td>
-                                    <td>{article.validated}</td>
+                                    <td>{article.valid ? "Si" : "No"}</td>
+                                    <td>{article.validated ? "Si" : "No"}</td>
                                 </tr>
                             );
                         })}

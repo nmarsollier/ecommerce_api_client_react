@@ -17,48 +17,48 @@ export default function Toolbar() {
 
       <div className="toolbar_title navbar-brand">
         Docs:
-        </div>
+      </div>
 
       <div className="btn-group navbar-nav">
         <a href="http://localhost:3000/docs/index.html" target="auth"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Auth
-          </a>
+        </a>
       </div>
 
       <div className="btn-group navbar-nav">
         <a href="http://localhost:3001/docs/index.html" target="image"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Image
-          </a>
+        </a>
       </div>
 
       <div className="btn-group navbar-nav">
         <a href="http://localhost:3002/" target="catalog"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Catalog
-          </a>
+        </a>
       </div>
 
       <div className="btn-group navbar-nav">
-        <a href="http://localhost:3003/" target="cart"
+        <a href="http://localhost:3003/docs/index.html" target="cart"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Cart
-          </a>
+        </a>
       </div>
 
       <div className="btn-group navbar-nav">
         <a href="http://localhost:3004/docs/index.html" target="order"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Order
-          </a>
+        </a>
       </div>
 
       <div className="btn-group navbar-nav">
         <a href="http://localhost:15672/" target="catalog"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Rabbit
-          </a>
+        </a>
       </div>
     </nav>
   );
