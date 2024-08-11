@@ -34,7 +34,7 @@ export default function Toolbar() {
       </div>
 
       <div className="btn-group navbar-nav">
-        <a href="http://localhost:3002/" target="catalog"
+        <a href="http://localhost:3002/docs/index.html" target="catalog"
           className="toolbar_button btn btn-outline-secondary btn-sm nav-link">
           Catalog
         </a>
