@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { IStoredState, logout } from "../system/store/SessionStore";
@@ -26,8 +25,7 @@ export default function MainMenu() {
       <NavLink to="/newArticle" className="menu_item btn btn-sm btn-link">Nuevo</NavLink><br />
       <NavLink to="/searchArticle" className="menu_item btn btn-sm btn-link">Buscar</NavLink><br />
       <h6 className="menu_section">Carrito</h6>
-      <NavLink to="/cart" className="menu_item btn btn-sm btn-link">Carrito Actual</NavLink><br />
-      <NavLink to="/editCart" className="menu_item btn btn-sm btn-link">Editar Carrito</NavLink><br />
+      <NavLink to="/editCart" className="menu_item btn btn-sm btn-link">Carrito</NavLink><br />
       <h6 className="menu_section">Ordenes</h6>
       <NavLink to="/orders" className="menu_item btn btn-sm btn-link">Ordenes</NavLink><br />
       <NavLink to="/searchOrder" className="menu_item btn btn-sm btn-link">Buscar</NavLink><br />
