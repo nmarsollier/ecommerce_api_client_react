@@ -9,7 +9,7 @@ ENV ORDER_SERVICE_URL=http://host.docker.internal:3004/v1/
 
 WORKDIR /app
 ENV PATH /app/node_modules/.bin:$PATH
-RUN curl -L https://github.com/nmarsollier/ecommerce_api_client_react/tarball/master | tar xz --strip=1
+RUN curl -L https://github.com/nmarsollier/ecommerce_api_client_react/archive/refs/heads/master.tar.gz | tar xz --strip=1
 RUN npm install --silent
 RUN npm run build
 
