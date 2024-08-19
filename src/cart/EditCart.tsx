@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DangerLabel from "../system/components/DangerLabel";
 import Form from "../system/components/Form";
 import FormAcceptButton from "../system/components/FormAcceptButton";
@@ -8,15 +9,14 @@ import FormInput from "../system/components/FormInput";
 import FormTitle from "../system/components/FormTitle";
 import FormWarnButton from "../system/components/FormWarnButton";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, useForceUpdate } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import { addArticle, decrementArticle, deleteArticle, incrementArticle } from "./CartApi";
 import CurrentCart from "./CurrentCart";
-import { useNavigate } from "react-router-dom";
 
 export default function EditCart(props: DefaultProps) {
     const [articleId, setArticleId] = useState("")
     const [quantity, setQuantity] = useState(0)
-    const forceUpdate = useForceUpdate();
+    const [update, forceUpdate] = useState(Date.now);
     const errorHandler = useErrorHandler()
     const navigate = useNavigate();
 
@@ -30,7 +30,7 @@ export default function EditCart(props: DefaultProps) {
                 articleId,
                 quantity,
             });
-            forceUpdate()
+            forceUpdate(Date.now)
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
@@ -40,7 +40,7 @@ export default function EditCart(props: DefaultProps) {
         try {
             if (articleId) {
                 await incrementArticle(articleId);
-                forceUpdate()
+                forceUpdate(Date.now)
             }
         } catch (error: any) {
             errorHandler.processRestValidations(error);
@@ -51,7 +51,7 @@ export default function EditCart(props: DefaultProps) {
         try {
             if (articleId) {
                 await decrementArticle(articleId);
-                forceUpdate()
+                forceUpdate(Date.now)
             }
         } catch (error: any) {
             errorHandler.processRestValidations(error);
@@ -62,7 +62,7 @@ export default function EditCart(props: DefaultProps) {
         try {
             if (articleId) {
                 await deleteArticle(articleId);
-                forceUpdate()
+                forceUpdate(Date.now)
             }
         } catch (error: any) {
             errorHandler.processRestValidations(error);
@@ -71,7 +71,7 @@ export default function EditCart(props: DefaultProps) {
 
     return (
         <div className="global_content">
-            <CurrentCart forceUpdate={forceUpdate}/>
+            <CurrentCart forceUpdate={() => { forceUpdate(Date.now) }} />
             <br />
 
             <FormTitle>Artículos</FormTitle>

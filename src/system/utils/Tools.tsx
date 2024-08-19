@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 export interface DefaultProps {
     history?: any;
@@ -6,10 +5,3 @@ export interface DefaultProps {
     children?: any;
 }
 
-export function useForceUpdate() {
-    const setForceUpdate = useState(0)[1]
-
-    return () => {
-        setForceUpdate(Date.now)
-    }
-}

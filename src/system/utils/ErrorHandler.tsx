@@ -1,4 +1,3 @@
-import { useForceUpdate } from "./Tools";
 import { useState } from "react";
 
 interface IError {
@@ -77,9 +76,9 @@ class ErrorHandler {
 }
 
 function useErrorHandler(): ErrorHandler {
-    const forceUpdate = useForceUpdate();
-    const handler = useState(new ErrorHandler(forceUpdate))[0]
+    const [update, forceUpdate] = useState(Date.now);
+    const handler = useState(new ErrorHandler(() => { forceUpdate(Date.now) }))[0]
     return handler
 }
 
-export { ErrorHandler, useErrorHandler }
+export { ErrorHandler, useErrorHandler };

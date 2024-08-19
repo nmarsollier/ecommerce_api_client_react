@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate, useParams } from 'react-router-dom';
 import "../styles.css";
 import DangerLabel from "../system/components/DangerLabel";
@@ -16,26 +16,14 @@ export default function SearchOrder(props: DefaultProps) {
     const params = useParams();
 
     const [text, setText] = useState("")
-    const [orderId, setOrderId] = useState<string>()
+    const [orderId, setOrderId] = useState<string>(params.orderId || "")
 
     const errorHandler = useErrorHandler()
     const navigate = useNavigate();
 
     const search = () => {
-        try {
-            setOrderId(text);
-        } catch (error: any) {
-            errorHandler.processRestValidations(error);
-        }
+        setOrderId(text);
     }
-
-    useEffect(() => {
-        const id = params.orderId;
-        if (id) {
-            setOrderId(id);
-            setText(id)
-        }
-    }, [params.orderId])
 
     return (
         <div className="global_content" >

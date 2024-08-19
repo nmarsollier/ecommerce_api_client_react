@@ -4,7 +4,7 @@ import FormButtonBar from "../system/components/FormButtonBar";
 import FormLabel from "../system/components/FormLabel";
 import FormTitle from "../system/components/FormTitle";
 import { useErrorHandler } from "../system/utils/ErrorHandler";
-import { DefaultProps, useForceUpdate } from "../system/utils/Tools";
+import { DefaultProps } from "../system/utils/Tools";
 import AddPayment from "./AddPayment";
 import { getOrder, IOrder, IPayment } from "./OrdersApi";
 
@@ -12,8 +12,8 @@ interface OrderDetailProps extends DefaultProps {
     orderId?: string;
 }
 
-export default function OrderDetail(props: OrderDetailProps) {
-    const forceUpdate = useForceUpdate();
+export default function OrderDetail({ orderId }: OrderDetailProps) {
+    const [update, forceUpdate] = useState(Date.now);
     const [order, setOrder] = useState<IOrder>()
     const [payment, setPayment] = useState<IPayment>()
 
@@ -21,22 +21,21 @@ export default function OrderDetail(props: OrderDetailProps) {
 
     const resetPayment = () => {
         setPayment(undefined);
-        forceUpdate()
+        forceUpdate(Date.now)
     }
 
     useEffect(() => {
         try {
-            if (!props.orderId) {
+            if (!orderId) {
                 return
             }
-            getOrder(props.orderId).then((orderResult) => {
+            getOrder(orderId).then((orderResult) => {
                 setOrder(orderResult);
             }).catch(() => { });
-            ;
         } catch (error: any) {
             errorHandler.processRestValidations(error);
         }
-    }, [props.orderId, errorHandler, forceUpdate])
+    }, [orderId, errorHandler, update])
 
     const addPayment = () => {
         try {
