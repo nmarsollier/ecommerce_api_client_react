@@ -13,7 +13,7 @@ export interface ICartValidation {
 }
 
 export interface ICart {
-    _id: string;
+    id: string;
     userId: string;
     orderId?: string;
     enabled: string;

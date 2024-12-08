@@ -14,112 +14,117 @@ import { DefaultProps } from "../system/utils/Tools";
 import { IArticle, findArticles } from "./CatalogApi";
 
 export default function SearchArticle(props: DefaultProps) {
-    const [text, setText] = useState("")
-    const [articles, setArticles] = useState(new Array<IArticle>())
+  const [text, setText] = useState("");
+  const [articles, setArticles] = useState(new Array<IArticle>());
 
-    const errorHandler = useErrorHandler()
-    const navigate = useNavigate();
+  const errorHandler = useErrorHandler();
+  const navigate = useNavigate();
 
-    const search = async () => {
-        try {
-            if (text) {
-                const articleResult = await findArticles(text);
-                setArticles(articleResult);
-            }
-        } catch (error: any) {
-            errorHandler.processRestValidations(error);
-        }
+  const search = async () => {
+    try {
+      if (text) {
+        const articleResult = await findArticles(text);
+        setArticles(articleResult);
+      }
+    } catch (error: any) {
+      errorHandler.processRestValidations(error);
     }
+  };
 
-    const showImage = (imageId: string | undefined) => {
-        if (imageId !== undefined) {
-            navigate("/showPicture/" + imageId);
-        }
+  const showImage = (imageId: string | undefined) => {
+    if (imageId !== undefined) {
+      navigate("/showPicture/" + imageId);
     }
+  };
 
-    const editArticle = (id: string | undefined) => {
-        if (id !== undefined) {
-            navigate("/editArticle/" + id);
-        }
+  const editArticle = (id: string | undefined) => {
+    if (id !== undefined) {
+      navigate("/editArticle/" + id);
     }
+  };
 
-    return (
-        <div className="global_content" >
-            <FormTitle>Buscar Artículos</FormTitle>
+  return (
+    <div className="global_content">
+      <FormTitle>Buscar Artículos</FormTitle>
 
-            <Form>
-                <FormInput
-                    label="Buscar Artículos"
-                    name="text"
-                    onChange={e => setText(e.target.value)}
-                    errorHandler={errorHandler} />
+      <Form>
+        <FormInput
+          label="Buscar Artículos"
+          name="text"
+          onChange={(e) => setText(e.target.value)}
+          errorHandler={errorHandler}
+        />
 
-                <DangerLabel message={errorHandler.errorMessage} />
+        <DangerLabel message={errorHandler.errorMessage} />
 
-                <FormButtonBar>
-                    <FormAcceptButton label="Buscar" onClick={search} />
-                    <FormButton label="Cancelar" onClick={() => navigate("/")} />
-                </FormButtonBar>
-            </Form>
+        <FormButtonBar>
+          <FormAcceptButton label="Buscar" onClick={search} />
+          <FormButton label="Cancelar" onClick={() => navigate("/")} />
+        </FormButtonBar>
+      </Form>
 
-            <ArticlesList articles={articles} onEditClick={editArticle} onShowImage={showImage} />
-        </div>
-    );
+      <ArticlesList
+        articles={articles}
+        onEditClick={editArticle}
+        onShowImage={showImage}
+      />
+    </div>
+  );
 }
 
 interface ArticlesListProps extends DefaultProps {
-    articles?: IArticle[],
-    onShowImage: (imageId: string | undefined) => any,
-    onEditClick: (id: string | undefined) => any
+  articles?: IArticle[];
+  onShowImage: (imageId: string | undefined) => any;
+  onEditClick: (id: string | undefined) => any;
 }
 
 function ArticlesList(props: ArticlesListProps) {
-    if (!props.articles) {
-        return null
-    }
-    return (
-        <div>
-            <br />
-            <table id="articles" className="table">
-                <thead>
-                    <tr>
-                        <th> Id </th>
-                        <th> Nombre </th>
-                        <th> Descripción </th>
-                        <th> Imagen </th>
-                        <th> Stock </th>
-                        <th> Precio </th>
-                        <th> </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {props.articles.map((article, i) => {
-                        return (
-                            <tr key={i}>
-                                <td>{article._id}</td>
-                                <td>{article.name}</td>
-                                <td>{article.description}</td>
-                                <td>
-                                    {article.image}&nbsp;
-                                    <ImageButton
-                                        imageUrl="/assets/find.png"
-                                        hidden={!article.image}
-                                        onClick={() => props.onShowImage(article.image)}
-                                    />
-                                </td>
-                                <td>{article.stock}</td>
-                                <td>{article.price}</td>
-                                <td>
-                                    <ImageButton
-                                        imageUrl="/assets/edit.png"
-                                        onClick={() => props.onEditClick(article._id)}
-                                    />
-                                </td>
-                            </tr>
-                        );
-                    })}
-                </tbody>
-            </table>
-        </div >
-    )
+  if (!props.articles) {
+    return null;
+  }
+  return (
+    <div>
+      <br />
+      <table id="articles" className="table">
+        <thead>
+          <tr>
+            <th> Id </th>
+            <th> Nombre </th>
+            <th> Descripción </th>
+            <th> Imagen </th>
+            <th> Stock </th>
+            <th> Precio </th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+          {props.articles.map((article, i) => {
+            return (
+              <tr key={i}>
+                <td>{article.id}</td>
+                <td>{article.name}</td>
+                <td>{article.description}</td>
+                <td>
+                  {article.image}&nbsp;
+                  <ImageButton
+                    imageUrl="/assets/find.png"
+                    hidden={!article.image}
+                    onClick={() => props.onShowImage(article.image)}
+                  />
+                </td>
+                <td>{article.stock}</td>
+                <td>{article.price}</td>
+                <td>
+                  <ImageButton
+                    imageUrl="/assets/edit.png"
+                    onClick={() => props.onEditClick(article.id)}
+                  />
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
 }
