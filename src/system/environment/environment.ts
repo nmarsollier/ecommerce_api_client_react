@@ -3,6 +3,6 @@ export const environment = {
   cartServerUrl: process.env.CART_SERVICE_URL || "http://localhost:3003/",
   catalogServerUrl: process.env.CATALOG_SERVICE_URL || "http://localhost:3002/",
   imageServerUrl: process.env.IMAGE_SERVICE_URL || "http://localhost:3001/",
-  orderServerUrl: process.env.ORDER_SERVICE_URL || "http://localhost:3004/v1/",
+  orderServerUrl: process.env.ORDER_SERVICE_URL || "http://localhost:3004/",
   production: false,
 };
